@@ -187,18 +187,5 @@ class TestMartianRobots(unittest.TestCase):
         expected = '4 4 N LOST'
         self.assertEquals(build_output(pos), expected)
 
-    
-#     def test_leave_scent(self):
-#         assert False
-
-#     def test_detect_scent_and_continue(self):
-#         assert False
-
-#     def test_ignore_other_robots(self):
-#         assert False
-
-#     def tearDown(self):
-#         assert False
-
 if __name__ == '__main__':
     unittest.main()
