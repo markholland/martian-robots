@@ -1,7 +1,7 @@
 """ Unit tests for Martian Robots program"""
 import unittest
 
-from martian_robots import valid_grid_size, valid_initial_pos, valid_orientation
+from martian_robots import valid_grid_size, valid_initial_pos, valid_orientation, valid_list_of_instructions
 
 class TestInputValidation(unittest.TestCase):
     def setUp(self):
@@ -61,11 +61,16 @@ class TestInputValidation(unittest.TestCase):
         orientation = 'A'
         self.assertFalse(valid_orientation(orientation))
 
-#     def test_validate_instruction_length(self):
-#         assert False
+    def test_validate_instruction(self):
+        instruction = 'RFRFRFRF'
+        self.assertTrue(valid_list_of_instructions(instruction))
 
-#     def test_validate_instruction(self):
-#         assert False
+        instruction = 'R F R F R FRF'
+        self.assertTrue(valid_list_of_instructions(instruction))
+
+        instruction = 'RFRFRFRD'
+        self.assertFalse(valid_list_of_instructions(instruction))
+
 
 #     def tearDown(self):
 #         assert False

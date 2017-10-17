@@ -9,23 +9,25 @@ def main():
         after following a series of instructions
     """
 
-    grid_size_input = raw_input('Enter grid size: ')
-    if(not valid_grid_size(grid_size_input)):
+    grid_size = raw_input('Enter grid size: ')
+    if(not valid_grid_size(grid_size)):
         print 'Grid size should be a pair of coordinates between 0 0 & 50 50'
         sys.exit()
-    grid_size = grid_size_input.split()
+    grid_size = grid_size.split()
+    grid = [[0 for i in range(int(grid_size[0]))] for j in range(int(grid_size[1]))]
 
     while True:
-        initial_pos_input = raw_input('Provide the initial position and orientation of a robot: ')
-        if(not valid_initial_pos(initial_pos_input)):
+        initial_pos = raw_input('Provide the initial position and orientation of a robot: ')
+        if(not valid_initial_pos(initial_pos)):
             print 'Initial position should be a coordinate and orientation i.e. 22 3 E'
             continue
+        initial_pos = get_initial_pos_as_dict(initial_pos)
 
-    # loop robots
-        # validate starting position
-        # validate starting orientation
-        # validate instruction length
-        # validate instruction content
+        instructions = raw_input('Provide the series of instructions for the robot: ')
+        if(not valid_list_of_instructions(instructions)):
+            print 'A valid instruction contains turns L or R and movements F with a limit of 100'
+            continue
+
         # calc final position
             # mark scent
             # detect scent
@@ -63,6 +65,17 @@ def valid_initial_pos(initial_pos):
 
 def valid_orientation(orientation):
     return re.search(r'[NESW]', orientation)
+
+def valid_list_of_instructions(instructions):
+    instructions = instructions.split()[0]
+    if not len(instructions) < 100:
+        return False
+    if not re.search(r'^[FLR]+$', instructions):
+        return False
+    return True
+
+def get_initial_pos_as_dict(initial_pos):
+    return {'x': initial_pos[0], 'y': initial_pos[1], 'orientation': initial_pos[2]}
 
 if __name__ == '__main__':
     main()
