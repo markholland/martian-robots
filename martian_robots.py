@@ -27,6 +27,10 @@ def main():
         if(not valid_list_of_instructions(instructions)):
             print 'A valid instruction contains turns L or R and movements F with a limit of 100'
             continue
+def over_the_edge(grid, pos):
+    if int(pos['x']) > (len(grid[0]) - 1) or int(pos['y']) > (len(grid) - 1):
+        return True
+    return False
 
 def get_position_change(orientation):
     if orientation == 'N':

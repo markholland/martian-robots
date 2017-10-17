@@ -96,8 +96,13 @@ class TestMartianRobots(unittest.TestCase):
         self.assertEquals(delta['x'], -1)
         self.assertEquals(delta['y'], 0)
 
-#     def test_change_position(self):
-#         assert False
+    def test_over_the_edge(self):
+        pos = {'x': 4, 'y': 4}
+        self.assertFalse(over_the_edge(self.grid, pos))
+        
+        pos = {'x': 4, 'y': 5}
+        self.assertTrue(over_the_edge(self.grid, pos))
+
 
 #     def test_leave_scent(self):
 #         assert False
