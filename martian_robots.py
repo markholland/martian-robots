@@ -10,11 +10,11 @@ def main():
     """
 
     grid_size = raw_input('Enter grid size: ')
-    if(not valid_grid_size(grid_size)):
+    if not valid_grid_size(grid_size):
         print 'Grid size should be a pair of coordinates between 0 0 & 50 50'
         sys.exit()
     grid_size = grid_size.split()
-    grid = [[0 for i in range(int(grid_size[0]))] for j in range(int(grid_size[1]))]
+    grid = [[0 for i in range(int(grid_size[0]) + 1)] for j in range(int(grid_size[1]) + 1)]
 
     while True:
         initial_pos = raw_input('Provide the initial position and orientation of a robot: ')
