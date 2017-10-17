@@ -21,6 +21,7 @@ def main():
         if not valid_initial_pos(initial_pos):
             print 'Initial position should be a coordinate and orientation i.e. 22 3 E'
             continue
+        initial_pos = initial_pos.split()
         initial_pos = get_initial_pos_as_dict(initial_pos)
 
         instructions = raw_input('Provide the series of instructions for the robot: ')
