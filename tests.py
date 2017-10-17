@@ -103,6 +103,15 @@ class TestMartianRobots(unittest.TestCase):
         pos = {'x': 4, 'y': 5}
         self.assertTrue(over_the_edge(self.grid, pos))
 
+    def test_build_output(self):
+        pos = {'x': 4, 'y': 4, 'orientation': 'N', 'over_edge': False}
+        expected = '4 4 N'
+        self.assertEquals(build_output(pos), expected)
+
+        pos = {'x': 4, 'y': 4, 'orientation': 'N', 'over_edge': True}
+        expected = '4 4 N LOST'
+        self.assertEquals(build_output(pos), expected)
+
 
 #     def test_leave_scent(self):
 #         assert False

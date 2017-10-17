@@ -27,6 +27,13 @@ def main():
         if(not valid_list_of_instructions(instructions)):
             print 'A valid instruction contains turns L or R and movements F with a limit of 100'
             continue
+def build_output(pos):
+    output = ""
+    output += str(pos['x']) + ' ' + str(pos['y']) + ' ' + pos['orientation']
+    if pos['over_edge'] is True:
+        output += ' ' + 'LOST'
+    return output
+
 def over_the_edge(grid, pos):
     if int(pos['x']) > (len(grid[0]) - 1) or int(pos['y']) > (len(grid) - 1):
         return True
