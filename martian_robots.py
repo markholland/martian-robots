@@ -3,6 +3,9 @@
 import sys
 import re
 
+MAX_COORDINATE = 50
+MAX_INSTR_LEN = 100
+
 def main():
     """
         This is a program for calculating the position of robots on Mars
@@ -125,7 +128,7 @@ def valid_grid_size(grid_size):
     for coordinate in grid_size:
         if not coordinate.isdigit():
             return False
-        if int(coordinate) > 50:
+        if int(coordinate) > MAX_COORDINATE:
             return False
     return True
 
@@ -138,7 +141,7 @@ def valid_initial_pos(initial_pos):
     y_coord = int(initial_pos[1])
     orientation = initial_pos[2]
 
-    if x_coord > 50 or y_coord > 50:
+    if x_coord > MAX_COORDINATE or y_coord > MAX_COORDINATE:
         return False
     if not valid_orientation(orientation):
         return False
@@ -150,7 +153,7 @@ def valid_orientation(orientation):
 
 def valid_list_of_instructions(instructions):
     instructions = instructions.split()[0]
-    if not len(instructions) < 100:
+    if not len(instructions) < MAX_INSTR_LEN:
         return False
     if not re.search(r'^[FLR]+$', instructions):
         return False
