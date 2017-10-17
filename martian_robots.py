@@ -28,13 +28,36 @@ def main():
             print 'A valid instruction contains turns L or R and movements F with a limit of 100'
             continue
 
-        # calc final position
-            # mark scent
-            # detect scent
-        # print output
-            # LOST if left grid
-    # end loop
-    # end
+def get_position_change(orientation):
+    if orientation == 'N':
+        delta = {'x': 0, 'y': 1}
+    if orientation == 'S':
+        delta = {'x': 0, 'y': -1}
+    if orientation == 'E':
+        delta = {'x': 1, 'y': 0}
+    if orientation == 'W':
+        delta = {'x': -1, 'y': 0}
+    return delta  
+
+def get_new_orientation_after_left_turn(orientation):
+    if orientation == 'N':
+        return 'W'
+    if orientation == 'E':
+        return 'N'
+    if orientation == 'S':
+        return 'E'
+    if orientation == 'W':
+        return 'S'
+
+def get_new_orientation_after_right_turn(orientation):
+    if orientation == 'N':
+        return 'E'
+    if orientation == 'E':
+        return 'S'
+    if orientation == 'S':
+        return 'W'
+    if orientation == 'W':
+        return 'N'
 
 def valid_grid_size(grid_size):
     grid_size = grid_size.split()

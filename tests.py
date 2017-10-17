@@ -75,9 +75,26 @@ class TestInputValidation(unittest.TestCase):
 #     def tearDown(self):
 #         assert False
 
-# class TestMartianRobots(unittest.TestCase):
-#     def setUp(self):
-#         assert False
+class TestMartianRobots(unittest.TestCase):
+    def setUp(self):
+        self.grid = [[0 for i in range(5)] for j in range(5)]
+
+    def test_change_position(self):
+        delta = get_position_change('N')
+        self.assertEquals(delta['x'], 0)
+        self.assertEquals(delta['y'], 1)
+
+        delta = get_position_change('E')
+        self.assertEquals(delta['x'], 1)
+        self.assertEquals(delta['y'], 0)
+
+        delta = get_position_change('S')
+        self.assertEquals(delta['x'], 0)
+        self.assertEquals(delta['y'], -1)
+
+        delta = get_position_change('W')
+        self.assertEquals(delta['x'], -1)
+        self.assertEquals(delta['y'], 0)
 
 #     def test_change_position(self):
 #         assert False
