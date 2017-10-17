@@ -13,8 +13,7 @@ def main():
     if not valid_grid_size(grid_size):
         print 'Grid size should be a pair of coordinates between 0 0 & 50 50'
         sys.exit()
-    grid_size = grid_size.split()
-    grid = [[0 for i in range(int(grid_size[1]) + 1)] for j in range(int(grid_size[0]) + 1)]
+    grid = build_grid(grid_size)
 
     while True:
         initial_pos = raw_input('Provide the initial position and orientation of a robot: ')
@@ -156,6 +155,10 @@ def valid_list_of_instructions(instructions):
     if not re.search(r'^[FLR]+$', instructions):
         return False
     return True
+
+def build_grid(grid_size):
+    grid_size = grid_size.split()
+    return [[0 for i in range(int(grid_size[1]) + 1)] for j in range(int(grid_size[0]) + 1)]
 
 def get_initial_pos_as_dict(initial_pos):
     return {
