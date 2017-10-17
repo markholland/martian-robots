@@ -100,6 +100,8 @@ class TestMartianRobots(unittest.TestCase):
         pos = {'x': 4, 'y': 5}
         self.assertTrue(over_the_edge(self.grid, pos))
 
+        pos = {'x': -1, 'y': 5}
+        self.assertTrue(over_the_edge(self.grid, pos))
     def test_get_new_position(self):
         current_pos = {
             'x': 0,
