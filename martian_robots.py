@@ -69,6 +69,7 @@ def get_new_position(grid, current_pos):
         new_pos = current_pos
     elif over_the_edge(grid, new_pos):
         grid[current_pos['x']][current_pos['y']] = current_pos['orientation']
+        new_pos = current_pos
         new_pos['over_edge'] = True
     return new_pos
 
