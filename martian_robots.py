@@ -158,7 +158,12 @@ def valid_list_of_instructions(instructions):
     return True
 
 def get_initial_pos_as_dict(initial_pos):
-    return {'x': initial_pos[0], 'y': initial_pos[1], 'orientation': initial_pos[2]}
+    return {
+        'x': initial_pos[0],
+        'y': initial_pos[1],
+        'orientation': initial_pos[2],
+        'over_edge': False
+    }
 
 if __name__ == '__main__':
     main()

@@ -102,6 +102,7 @@ class TestMartianRobots(unittest.TestCase):
 
         pos = {'x': -1, 'y': 5}
         self.assertTrue(over_the_edge(self.grid, pos))
+
     def test_get_new_position(self):
         current_pos = {
             'x': 0,
@@ -125,7 +126,7 @@ class TestMartianRobots(unittest.TestCase):
         }
         expected = {
             'x': 0,
-            'y': 5,
+            'y': 4,
             'orientation': 'N',
             'over_edge': True
         }
@@ -134,7 +135,7 @@ class TestMartianRobots(unittest.TestCase):
     def test_get_final_position(self):
         # 5x3 grid
         self.grid = [[0 for i in range(4)] for j in range(6)]
-        
+
         pos = {
             'x': 1,
             'y': 1,
@@ -157,7 +158,7 @@ class TestMartianRobots(unittest.TestCase):
         instructions = 'FRRFLLFFRRFLL'
         expected = {
             'x': 3,
-            'y': 4,
+            'y': 3,
             'orientation': 'N',
             'over_edge': True
         }
