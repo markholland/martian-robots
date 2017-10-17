@@ -1,7 +1,7 @@
 """ Unit tests for Martian Robots program"""
 import unittest
 
-from martian_robots import valid_grid_size, valid_initial_pos, valid_orientation, valid_list_of_instructions
+from martian_robots import valid_grid_size, valid_initial_pos, valid_orientation, valid_list_of_instructions, get_position_change, over_the_edge, build_output, get_new_position, get_final_position
 
 class TestInputValidation(unittest.TestCase):
     def setUp(self):
@@ -103,6 +103,65 @@ class TestMartianRobots(unittest.TestCase):
         pos = {'x': 4, 'y': 5}
         self.assertTrue(over_the_edge(self.grid, pos))
 
+    def test_get_new_position(self):
+        current_pos = {
+            'x': 0,
+            'y': 0,
+            'orientation': 'N',
+            'over_edge': False
+        }
+        expected = {
+            'x': 0,
+            'y': 1,
+            'orientation': 'N',
+            'over_edge': False
+        }
+        self.assertEquals(get_new_position(self.grid, current_pos), expected)
+
+        current_pos = {
+            'x': 0,
+            'y': 4,
+            'orientation': 'N',
+            'over_edge': False
+        }
+        expected = {
+            'x': 0,
+            'y': 5,
+            'orientation': 'N',
+            'over_edge': True
+        }
+        self.assertEquals(get_new_position(self.grid, current_pos), expected)
+    
+    def test_get_final_position(self):
+        self.grid = [[0 for i in range(3)] for j in range(5)]
+        pos = {
+            'x': 1,
+            'y': 1,
+            'orientation': 'E'
+        }
+        instructions = 'RFRFRFRF'
+        expected = {
+            'x': 1,
+            'y': 1,
+            'orientation': 'E',
+            'over_edge': False
+        }
+        self.assertEquals(get_final_position(self.grid, pos, instructions), expected)
+
+        pos = {
+            'x': 3,
+            'y': 2,
+            'orientation': 'N'
+        }
+        instructions = 'FRRFLLFFRRFLL'
+        expected = {
+            'x': 3,
+            'y': 3,
+            'orientation': 'N',
+            'over_edge': True
+        }
+        self.assertEquals(get_final_position(self.grid, pos, instructions), expected)
+
     def test_build_output(self):
         pos = {'x': 4, 'y': 4, 'orientation': 'N', 'over_edge': False}
         expected = '4 4 N'
@@ -112,7 +171,7 @@ class TestMartianRobots(unittest.TestCase):
         expected = '4 4 N LOST'
         self.assertEquals(build_output(pos), expected)
 
-
+    
 #     def test_leave_scent(self):
 #         assert False
 

@@ -5,7 +5,7 @@ import re
 
 def main():
     """
-        This is a program for calculating the position of a robot on Mars
+        This is a program for calculating the position of robots on Mars
         after following a series of instructions
     """
 
@@ -18,21 +18,58 @@ def main():
 
     while True:
         initial_pos = raw_input('Provide the initial position and orientation of a robot: ')
-        if(not valid_initial_pos(initial_pos)):
+        if not valid_initial_pos(initial_pos):
             print 'Initial position should be a coordinate and orientation i.e. 22 3 E'
             continue
         initial_pos = get_initial_pos_as_dict(initial_pos)
 
         instructions = raw_input('Provide the series of instructions for the robot: ')
-        if(not valid_list_of_instructions(instructions)):
+        if not valid_list_of_instructions(instructions):
             print 'A valid instruction contains turns L or R and movements F with a limit of 100'
             continue
+        final_pos = get_final_position(grid, initial_pos, instructions)
+        print build_output(final_pos)
+
 def build_output(pos):
     output = ""
     output += str(pos['x']) + ' ' + str(pos['y']) + ' ' + pos['orientation']
     if pos['over_edge'] is True:
         output += ' ' + 'LOST'
     return output
+
+def get_final_position(grid, initial_pos, instructions):
+    current_pos = {
+        'x': int(initial_pos['x']),
+        'y': int(initial_pos['y']),
+        'orientation': initial_pos['orientation'],
+        'over_edge': False
+    }
+
+    for instr in instructions:
+        if instr == 'F':
+            current_pos = get_new_position(grid, current_pos)
+            if current_pos['over_edge'] is True:
+                break
+        if instr == 'L':
+            current_pos['orientation'] = get_new_orientation_after_left_turn(current_pos['orientation'])
+        if instr == 'R':
+            current_pos['orientation'] = get_new_orientation_after_right_turn(current_pos['orientation'])
+
+    return current_pos
+
+def get_new_position(grid, current_pos):
+    delta = get_position_change(current_pos['orientation'])
+    new_pos = {
+        'x': int(current_pos['x'] + delta['x']),
+        'y': int(current_pos['y'] + delta['y']),
+        'orientation': current_pos['orientation'],
+        'over_edge': False}
+    if over_the_edge(grid, new_pos):
+        grid[current_pos['x']][current_pos['y']] = -1
+        new_pos['over_edge'] = True
+    elif grid[new_pos['x']][new_pos['y']] == -1:
+        new_pos = current_pos
+    return new_pos
 
 def over_the_edge(grid, pos):
     if int(pos['x']) > (len(grid[0]) - 1) or int(pos['y']) > (len(grid) - 1):
