@@ -73,7 +73,13 @@ def get_new_position(grid, current_pos):
     return new_pos
 
 def over_the_edge(grid, pos):
-    if int(pos['x']) > (len(grid) - 1) or int(pos['y']) > (len(grid[0]) - 1):
+    if int(pos['x']) > (len(grid) - 1):
+        return True
+    if int(pos['y']) > (len(grid[0]) - 1):
+        return True
+    if int(pos['x']) < 0:
+        return True
+    if int(pos['y']) < 0:
         return True
     return False
 
