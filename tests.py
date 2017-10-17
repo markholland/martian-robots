@@ -41,7 +41,7 @@ class TestInputValidation(unittest.TestCase):
 
         initial_pos = '50 50 W'
         self.assertTrue(valid_initial_pos(initial_pos))
-        
+
         initial_pos = '1 2 D'
         self.assertFalse(valid_initial_pos(initial_pos))
 
@@ -96,7 +96,7 @@ class TestMartianRobots(unittest.TestCase):
     def test_over_the_edge(self):
         pos = {'x': 4, 'y': 4}
         self.assertFalse(over_the_edge(self.grid, pos))
-        
+
         pos = {'x': 4, 'y': 5}
         self.assertTrue(over_the_edge(self.grid, pos))
 
@@ -131,7 +131,7 @@ class TestMartianRobots(unittest.TestCase):
             'over_edge': True
         }
         self.assertEquals(get_new_position(self.grid, current_pos), expected)
-    
+
     def test_get_final_position(self):
         # 5x3 grid
         self.grid = [[0 for i in range(4)] for j in range(6)]
