@@ -63,18 +63,22 @@ def get_new_position(grid, current_pos):
         'x': int(current_pos['x'] + delta['x']),
         'y': int(current_pos['y'] + delta['y']),
         'orientation': current_pos['orientation'],
-        'over_edge': False}
-    if over_the_edge(grid, new_pos):
-        grid[current_pos['x']][current_pos['y']] = -1
-        new_pos['over_edge'] = True
-    elif grid[new_pos['x']][new_pos['y']] == -1:
+        'over_edge': False
+    }
+    if picks_up_scent(grid, current_pos):
         new_pos = current_pos
+    elif over_the_edge(grid, new_pos):
+        grid[current_pos['x']][current_pos['y']] = current_pos['orientation']
+        new_pos['over_edge'] = True
     return new_pos
 
 def over_the_edge(grid, pos):
-    if int(pos['x']) > (len(grid[0]) - 1) or int(pos['y']) > (len(grid) - 1):
+    if int(pos['x']) > (len(grid) - 1) or int(pos['y']) > (len(grid[0]) - 1):
         return True
     return False
+
+def picks_up_scent(grid, current_pos):
+    return grid[current_pos['x']][current_pos['y']] == current_pos['orientation']
 
 def get_position_change(orientation):
     if orientation == 'N':

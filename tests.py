@@ -11,7 +11,7 @@ class TestInputValidation(unittest.TestCase):
         grid_size = '1 2'
         self.assertTrue(valid_grid_size(grid_size))
 
-        grid_size = '50 50'
+        grid_size = '49 50'
         self.assertTrue(valid_grid_size(grid_size))
 
         grid_size = '50 51'
@@ -71,12 +71,9 @@ class TestInputValidation(unittest.TestCase):
         instruction = 'RFRFRFRD'
         self.assertFalse(valid_list_of_instructions(instruction))
 
-
-#     def tearDown(self):
-#         assert False
-
 class TestMartianRobots(unittest.TestCase):
     def setUp(self):
+        # 4x4 grid
         self.grid = [[0 for i in range(5)] for j in range(5)]
 
     def test_change_position(self):
@@ -133,7 +130,9 @@ class TestMartianRobots(unittest.TestCase):
         self.assertEquals(get_new_position(self.grid, current_pos), expected)
     
     def test_get_final_position(self):
-        self.grid = [[0 for i in range(3)] for j in range(5)]
+        # 5x3 grid
+        self.grid = [[0 for i in range(4)] for j in range(6)]
+        
         pos = {
             'x': 1,
             'y': 1,
@@ -156,9 +155,23 @@ class TestMartianRobots(unittest.TestCase):
         instructions = 'FRRFLLFFRRFLL'
         expected = {
             'x': 3,
-            'y': 3,
+            'y': 4,
             'orientation': 'N',
             'over_edge': True
+        }
+        self.assertEquals(get_final_position(self.grid, pos, instructions), expected)
+
+        pos = {
+            'x': 0,
+            'y': 3,
+            'orientation': 'W'
+        }
+        instructions = 'LLFFFLFLFL'
+        expected = {
+            'x': 2,
+            'y': 3,
+            'orientation': 'S',
+            'over_edge': False
         }
         self.assertEquals(get_final_position(self.grid, pos, instructions), expected)
 
